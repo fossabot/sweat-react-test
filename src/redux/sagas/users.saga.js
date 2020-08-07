@@ -5,7 +5,7 @@ import apiConfig from "../../config/api.config";
 import { setUsers } from "../actions/users.actions";
 
 function* getUsers({ payload }) {
-  const paginationUrlVars = `?page=${payload.page + 1}&results=20`;
+  const paginationUrlVars = `?page=${payload.page + 1}&results=10&seed=abc`;
   try {
     const users = yield call(apiCall, "get", `${apiConfig.baseUrl}/api/${paginationUrlVars}`);
     yield put(
@@ -15,13 +15,15 @@ function* getUsers({ payload }) {
       }),
     );
   } catch (error) {
-    yield put(setUsers({
-      usersList: null,
-      fetchInfo: {
-        page: payload.page
-      },
-      error
-    }));
+    yield put(
+      setUsers({
+        usersList: null,
+        fetchInfo: {
+          page: payload.page,
+        },
+        error,
+      }),
+    );
   }
 }
 export default function* usersSaga() {

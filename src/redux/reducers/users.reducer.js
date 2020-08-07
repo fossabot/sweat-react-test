@@ -1,10 +1,14 @@
 export const FETCH_USERS = "FETCH_USERS";
 export const SET_USERS = "SET_USERS";
+export const USERS_SET_PAGINATION = "USERS_SET_PAGINATION";
 
 const INITIAL_STATE = {
   isLoading: false,
   usersList: [],
   fetchInfo: {
+    page: 0,
+  },
+  pagination: {
     page: 0,
   },
   error: null,
@@ -26,7 +30,17 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...action.payload,
         usersList,
+        pagination: {
+          currentPage: action.payload.fetchInfo.page,
+        },
         isLoading: false,
+      };
+    case USERS_SET_PAGINATION:
+      return {
+        ...state,
+        pagination: {
+          currentPage: action.payload.page,
+        },
       };
     default:
       return {

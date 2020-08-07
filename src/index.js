@@ -1,4 +1,5 @@
 import React from "react";
+import 'fontsource-roboto';
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
